@@ -39,7 +39,7 @@ If you prefer Markdown, it will depend a bit on the flavor used by each platform
 Or even BBCode:
 
 ```
-[url=discord.gg/XXXXXXXXXX][img]https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png][/url]
+[url=https://discord.gg/XXXXXXXXXX][img]https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png[/img][/url]
 ```
 
 ## TO-DO 🔮
