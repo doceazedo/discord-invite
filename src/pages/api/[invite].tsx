@@ -6,6 +6,18 @@ export const config = {
   runtime: "edge",
 };
 
+const ggSansRegular = fetch(
+  new URL("../../../assets/gg-sans-regular.ttf", import.meta.url)
+).then((res) => res.arrayBuffer());
+
+const ggSansSemibold = fetch(
+  new URL("../../../assets/gg-sans-semibold.ttf", import.meta.url)
+).then((res) => res.arrayBuffer());
+
+const ggSansBold = fetch(
+  new URL("../../../assets/gg-sans-bold.ttf", import.meta.url)
+).then((res) => res.arrayBuffer());
+
 export default async function handler(req: NextRequest) {
   const { pathname } = new URL(req.url);
   const params = pathname.split("/")[2].split(".");
@@ -21,6 +33,10 @@ export default async function handler(req: NextRequest) {
   if (invite.message && invite.code)
     return errorImage(`[${invite.code}] ${invite.message}`);
 
+  const ggSansRegularData = await ggSansRegular;
+  const ggSansSemiboldData = await ggSansSemibold;
+  const ggSansBoldData = await ggSansBold;
+
   try {
     return new ImageResponse(
       (
@@ -34,6 +50,7 @@ export default async function handler(req: NextRequest) {
             padding: 16,
             backgroundColor: "#2b2d31",
             borderRadius: 4,
+            fontFamily: "'gg sans'",
           }}
         >
           <p
@@ -69,7 +86,7 @@ export default async function handler(req: NextRequest) {
               <p
                 style={{
                   fontSize: 16,
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: `#ffffff`,
                   margin: 0,
                 }}
@@ -98,6 +115,7 @@ export default async function handler(req: NextRequest) {
                       height: 8,
                       borderRadius: `50%`,
                       backgroundColor: `#23a559`,
+                      marginTop: 3,
                     }}
                   ></span>
                   {invite.approximate_presence_count} online
@@ -116,6 +134,7 @@ export default async function handler(req: NextRequest) {
                       height: 8,
                       borderRadius: `50%`,
                       backgroundColor: `#80848e`,
+                      marginTop: 3,
                     }}
                   ></span>
                   {invite.approximate_member_count} membros
@@ -131,11 +150,12 @@ export default async function handler(req: NextRequest) {
                 marginLeft: `auto`,
                 backgroundColor: `#248046`,
                 fontSize: 14,
+                fontWeight: 600,
                 color: `#ffffff`,
                 borderRadius: 3,
               }}
             >
-              Entrar
+              Juntar-se
             </div>
           </div>
         </div>
@@ -143,6 +163,23 @@ export default async function handler(req: NextRequest) {
       {
         width: 432,
         height: 110,
+        fonts: [
+          {
+            name: "gg sans",
+            data: ggSansRegularData,
+            weight: 400,
+          },
+          {
+            name: "gg sans",
+            data: ggSansSemiboldData,
+            weight: 600,
+          },
+          {
+            name: "gg sans",
+            data: ggSansBoldData,
+            weight: 700,
+          },
+        ],
       }
     );
   } catch (e: any) {
