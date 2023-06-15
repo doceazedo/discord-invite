@@ -1,7 +1,7 @@
 <h1 align="center">discord-invite</h1>
 
 <p align="center">
-  Embed your Discord guild invite in social media profiles, forum signatures, websites or anywhere that supports images!
+  Embed your Discord guild invite in social media profiles, forum signatures, websites or anywhere that supports third-party hosted images!
 </p>
 
 <p align="center">
@@ -45,6 +45,14 @@ Or even BBCode:
 ## TO-DO 🔮
 
 You can see the TO-DO list for this project [here](https://todo.doceazedo.com/discord-invite).
+
+## Why and how? 🤔
+
+Discord does not offer an official invite widget, but only a guild iframe showing a list of online members and channels.
+
+This app allows anyone to add guild invites anywhere outside of Discord by using just an image that resembles the official in-app invite.
+
+This is possible by using the Discord API to fetch the invite link data and generate the image on the fly using [@vercel/og](https://vercel.com/blog/introducing-vercel-og-image-generation-fast-dynamic-social-card-images).
 
 ## Development 🧰
 
