@@ -42,6 +42,10 @@ Or even BBCode:
 [url=discord.gg/XXXXXXXXXX][img]https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png][/url]
 ```
 
+## TO-DO 🔮
+
+You can see the TO-DO list for this project [here](https://todo.doceazedo.com/discord-invite).
+
 ## Development 🧰
 
 This is a [Next.js](https://nextjs.org) app, so everything should work just like any other Next project.
