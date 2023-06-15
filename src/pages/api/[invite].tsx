@@ -6,36 +6,22 @@ export const config = {
   runtime: "edge",
 };
 
-export default async function handler(request: NextRequest) {
+export default async function handler(req: NextRequest) {
+  const { pathname } = new URL(req.url);
+  const params = pathname.split("/")[2].split(".");
+
+  if (params.length != 2)
+    return errorImage("Invalid link, should be: /api/[invite].png");
+
+  const [code, format] = params;
+  if (format != "png") return errorImage("Invalid format, should be: png");
+
+  const invite = await getInviteData(code);
+  if (!invite) return errorImage("Could not retrieve invite");
+  if (invite.message && invite.code)
+    return errorImage(`[${invite.code}] ${invite.message}`);
+
   try {
-    const { searchParams } = new URL(request.url);
-    const invite = searchParams.get("invite");
-    if (!invite) {
-      return new ImageResponse(<>Visit with &quot;?invite=&quot;</>, {
-        width: 432,
-        height: 110,
-      });
-    }
-
-    const resp = await fetch(
-      `https://discord.com/api/v9/invites/${invite}?with_counts=true&with_expiration=true`
-    );
-    const data = await resp.json();
-
-    if (data.message && data.code) {
-      return new ImageResponse(
-        (
-          <>
-            [{data.code}] {data.message}
-          </>
-        ),
-        {
-          width: 432,
-          height: 110,
-        }
-      );
-    }
-
     return new ImageResponse(
       (
         <div
@@ -72,7 +58,7 @@ export default async function handler(request: NextRequest) {
             <img
               width="50"
               height="50"
-              src={`https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}.jpg?size=240`}
+              src={`https://cdn.discordapp.com/icons/${invite.guild.id}/${invite.guild.icon}.jpg?size=240`}
               alt=""
               style={{
                 borderRadius: 15,
@@ -88,7 +74,7 @@ export default async function handler(request: NextRequest) {
                   margin: 0,
                 }}
               >
-                {data.guild.name}
+                {invite.guild.name}
               </p>
               <div
                 style={{
@@ -114,7 +100,7 @@ export default async function handler(request: NextRequest) {
                       backgroundColor: `#23a559`,
                     }}
                   ></span>
-                  {data.approximate_presence_count} online
+                  {invite.approximate_presence_count} online
                 </p>
                 <p
                   style={{
@@ -132,7 +118,7 @@ export default async function handler(request: NextRequest) {
                       backgroundColor: `#80848e`,
                     }}
                   ></span>
-                  {data.approximate_member_count} membros
+                  {invite.approximate_member_count} membros
                 </p>
               </div>
             </div>
@@ -160,9 +146,26 @@ export default async function handler(request: NextRequest) {
       }
     );
   } catch (e: any) {
-    console.log(`${e.message}`);
     return new Response(`Failed to generate the image`, {
       status: 500,
     });
   }
 }
+
+const errorImage = (error: string) =>
+  new ImageResponse(<>{error}</>, {
+    width: 432,
+    height: 110,
+  });
+
+const getInviteData = async (invite: string) => {
+  try {
+    const resp = await fetch(
+      `https://discord.com/api/v9/invites/${invite}?with_counts=true&with_expiration=true`
+    );
+    const data = await resp.json();
+    return data;
+  } catch (error) {
+    return null;
+  }
+};
