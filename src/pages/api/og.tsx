@@ -6,67 +6,157 @@ export const config = {
   runtime: "edge",
 };
 
-export default function handler(request: NextRequest) {
+export default async function handler(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
+    const invite = searchParams.get("invite");
+    if (!invite) {
+      return new ImageResponse(<>Visit with &quot;?invite=&quot;</>, {
+        width: 432,
+        height: 110,
+      });
+    }
 
-    // ?title=<title>
-    const hasTitle = searchParams.has("title");
-    const title = hasTitle
-      ? searchParams.get("title")?.slice(0, 100)
-      : "My default title";
+    const resp = await fetch(
+      `https://discord.com/api/v9/invites/${invite}?with_counts=true&with_expiration=true`
+    );
+    const data = await resp.json();
+
+    if (data.message && data.code) {
+      return new ImageResponse(
+        (
+          <>
+            [{data.code}] {data.message}
+          </>
+        ),
+        {
+          width: 432,
+          height: 110,
+        }
+      );
+    }
 
     return new ImageResponse(
       (
         <div
           style={{
-            backgroundColor: "black",
-            backgroundSize: "150px 150px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
             height: "100%",
             width: "100%",
-            display: "flex",
-            textAlign: "center",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            flexWrap: "nowrap",
+            padding: 16,
+            backgroundColor: "#2b2d31",
+            borderRadius: 4,
           }}
         >
+          <p
+            style={{
+              fontSize: 12,
+              fontWeight: 700,
+              margin: 0,
+              color: "#b5bac1",
+              textTransform: "uppercase",
+            }}
+          >
+            Você recebeu um convite para entrar em um servidor
+          </p>
+
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              justifyItems: "center",
+              gap: 16,
             }}
           >
             <img
-              alt="Vercel"
-              height={200}
-              src="data:image/svg+xml,%3Csvg width='116' height='100' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M57.5 0L115 100H0L57.5 0z' /%3E%3C/svg%3E"
-              style={{ margin: "0 30px" }}
-              width={232}
+              width="50"
+              height="50"
+              src={`https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}.jpg?size=240`}
+              alt=""
+              style={{
+                borderRadius: 15,
+              }}
             />
-          </div>
-          <div
-            style={{
-              fontSize: 60,
-              fontStyle: "normal",
-              letterSpacing: "-0.025em",
-              color: "white",
-              marginTop: 30,
-              padding: "0 120px",
-              lineHeight: 1.4,
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {title}
+
+            <div style={{ display: `flex`, flexDirection: `column` }}>
+              <p
+                style={{
+                  fontSize: 16,
+                  fontWeight: 600,
+                  color: `#ffffff`,
+                  margin: 0,
+                }}
+              >
+                {data.guild.name}
+              </p>
+              <div
+                style={{
+                  display: `flex`,
+                  gap: 12,
+                  fontSize: 14,
+                  color: `#b5bac1`,
+                }}
+              >
+                <p
+                  style={{
+                    display: `flex`,
+                    alignItems: `center`,
+                    gap: 4,
+                    margin: 0,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: `50%`,
+                      backgroundColor: `#23a559`,
+                    }}
+                  ></span>
+                  {data.approximate_presence_count} online
+                </p>
+                <p
+                  style={{
+                    display: `flex`,
+                    alignItems: `center`,
+                    gap: 4,
+                    margin: 0,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: `50%`,
+                      backgroundColor: `#80848e`,
+                    }}
+                  ></span>
+                  {data.approximate_member_count} membros
+                </p>
+              </div>
+            </div>
+            <div
+              style={{
+                display: `flex`,
+                alignItems: `center`,
+                height: 40,
+                padding: `0 16px`,
+                marginLeft: `auto`,
+                backgroundColor: `#248046`,
+                fontSize: 14,
+                color: `#ffffff`,
+                borderRadius: 3,
+              }}
+            >
+              Entrar
+            </div>
           </div>
         </div>
       ),
       {
-        width: 1200,
-        height: 630,
+        width: 432,
+        height: 110,
       }
     );
   } catch (e: any) {
