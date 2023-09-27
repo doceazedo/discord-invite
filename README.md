@@ -19,7 +19,7 @@
 Embed this image URL anywhere you want:
 
 ```
-https://discord-invite.doceazedo.com/api/[INVITE].png
+https://discord-invite.doceazedo.com/[INVITE].png
 ```
 
 You will probably also want to wrap the image with your invite link. You can do this using HTML like so:
