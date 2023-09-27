@@ -1,7 +1,7 @@
 import satori from 'satori';
 import type { Font as SatoriFont, FontWeight } from 'satori';
-import { Invite } from './invite';
-import { ErrorImage } from './errorImage';
+import { Invite } from '$lib/Invite';
+import { ErrorImage } from '$lib/ErrorImage';
 
 type Font = {
 	name: string;
