@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://discord.gg/vEGRe2kq8B">
-    <img src="https://discord-invite.doceazedo.com/vEGRe2kq8B.png" alt="Discord invite">
+    <img src="https://discord-invite.doceazedo.com/vEGRe2kq8B.svg" alt="Discord invite">
   </a>
 </p>
 
@@ -19,27 +19,27 @@
 Embed this image URL anywhere you want:
 
 ```
-https://discord-invite.doceazedo.com/[INVITE].png
+https://discord-invite.doceazedo.com/[INVITE].svg
 ```
 
 You will probably also want to wrap the image with your invite link. You can do this using HTML like so:
 
 ```html
 <a href="https://discord.gg/XXXXXXXXXX">
-	<img src="https://discord-invite.doceazedo.com/XXXXXXXXXX.png" />
+	<img src="https://discord-invite.doceazedo.com/XXXXXXXXXX.svg" />
 </a>
 ```
 
 If you prefer Markdown, it will depend a bit on the flavor used by each platform. In general, you can do something link this:
 
 ```md
-[![](https://discord-invite.doceazedo.com/XXXXXXXXXX.png)](https://discord.gg/XXXXXXXXXX)
+[![](https://discord-invite.doceazedo.com/XXXXXXXXXX.svg)](https://discord.gg/XXXXXXXXXX)
 ```
 
 Or even BBCode:
 
 ```
-[url=https://discord.gg/XXXXXXXXXX][img]https://discord-invite.doceazedo.com/XXXXXXXXXX.png[/img][/url]
+[url=https://discord.gg/XXXXXXXXXX][img]https://discord-invite.doceazedo.com/XXXXXXXXXX.svg[/img][/url]
 ```
 
 ## TO-DO 🔮
