@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://discord.gg/vEGRe2kq8B">
-    <img src="https://discord-invite.doceazedo.com/api/vEGRe2kq8B.png" alt="Discord invite">
+    <img src="https://discord-invite.doceazedo.com/vEGRe2kq8B.png" alt="Discord invite">
   </a>
 </p>
 
@@ -26,20 +26,20 @@ You will probably also want to wrap the image with your invite link. You can do 
 
 ```html
 <a href="https://discord.gg/XXXXXXXXXX">
-  <img src="https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png" />
+	<img src="https://discord-invite.doceazedo.com/XXXXXXXXXX.png" />
 </a>
 ```
 
 If you prefer Markdown, it will depend a bit on the flavor used by each platform. In general, you can do something link this:
 
 ```md
-[![](https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png)](https://discord.gg/XXXXXXXXXX)
+[![](https://discord-invite.doceazedo.com/XXXXXXXXXX.png)](https://discord.gg/XXXXXXXXXX)
 ```
 
 Or even BBCode:
 
 ```
-[url=https://discord.gg/XXXXXXXXXX][img]https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png[/img][/url]
+[url=https://discord.gg/XXXXXXXXXX][img]https://discord-invite.doceazedo.com/XXXXXXXXXX.png[/img][/url]
 ```
 
 ## TO-DO 🔮
@@ -52,11 +52,11 @@ Discord does not offer an official invite widget, but only a guild iframe showin
 
 This app allows anyone to add guild invites anywhere outside of Discord by using just an image that resembles the official in-app invite.
 
-This is possible by using the Discord API to fetch the invite link data and generate the image on the fly using [@vercel/og](https://vercel.com/blog/introducing-vercel-og-image-generation-fast-dynamic-social-card-images).
+This is possible by using the Discord API to fetch the invite link data and generate the image on the fly using [Satori](https://github.com/vercel/satori).
 
 ## Development 🧰
 
-This is a [Next.js](https://nextjs.org) app, so everything should work just like any other Next project.
+This is a [SvelteKit](https://kit.svelte.dev) app, so everything should work just like any other SvelteKit project.
 
 You can run the development server with:
 
@@ -68,9 +68,9 @@ yarn dev
 pnpm dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Open http://localhost:5173 with your browser to see the result.
 
-You can start editing the image generator by modifying [`src/pages/api/[invite].tsx`](/src/pages/api/[invite].tsx).
+You can start editing the image generator by modifying [`src/routes/[invite].svg/+server.ts`](/src/routes/[invite].svg/+server.ts).
 
 ## Deploy 🚀
 
