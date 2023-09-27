@@ -1,79 +1,38 @@
-<h1 align="center">discord-invite</h1>
+# create-svelte
 
-<p align="center">
-  Embed your Discord guild invite in social media profiles, forum signatures, websites or anywhere that supports third-party hosted images!
-</p>
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-<p align="center">
-  <img src="https://img.shields.io/github/deployments/doceazedo/discord-invite/Production?label=vercel&logo=vercel&style=flat-square" alt="Vercel status">
-</p>
+## Creating a project
 
-<p align="center">
-  <a href="https://discord.gg/vEGRe2kq8B">
-    <img src="https://discord-invite.doceazedo.com/api/vEGRe2kq8B.png" alt="Discord invite">
-  </a>
-</p>
+If you're seeing this, you've probably already done this step. Congrats!
 
-## Usage 🔗
+```bash
+# create a new project in the current directory
+npm create svelte@latest
 
-Embed this image URL anywhere you want:
-
-```
-https://discord-invite.doceazedo.com/api/[INVITE].png
+# create a new project in my-app
+npm create svelte@latest my-app
 ```
 
-You will probably also want to wrap the image with your invite link. You can do this using HTML like so:
+## Developing
 
-```html
-<a href="https://discord.gg/XXXXXXXXXX">
-  <img src="https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png" />
-</a>
-```
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-If you prefer Markdown, it will depend a bit on the flavor used by each platform. In general, you can do something link this:
-
-```md
-[![](https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png)](https://discord.gg/XXXXXXXXXX)
-```
-
-Or even BBCode:
-
-```
-[url=https://discord.gg/XXXXXXXXXX][img]https://discord-invite.doceazedo.com/api/XXXXXXXXXX.png[/img][/url]
-```
-
-## TO-DO 🔮
-
-You can see the TO-DO list for this project [here](https://todo.doceazedo.com/discord-invite).
-
-## Why and how? 🤔
-
-Discord does not offer an official invite widget, but only a guild iframe showing a list of online members and channels.
-
-This app allows anyone to add guild invites anywhere outside of Discord by using just an image that resembles the official in-app invite.
-
-This is possible by using the Discord API to fetch the invite link data and generate the image on the fly using [@vercel/og](https://vercel.com/blog/introducing-vercel-og-image-generation-fast-dynamic-social-card-images).
-
-## Development 🧰
-
-This is a [Next.js](https://nextjs.org) app, so everything should work just like any other Next project.
-
-You can run the development server with:
-
-```sh
+```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+## Building
 
-You can start editing the image generator by modifying [`src/pages/api/[invite].tsx`](/src/pages/api/[invite].tsx).
+To create a production version of your app:
 
-## Deploy 🚀
+```bash
+npm run build
+```
 
-This app is edge-ready! And the easiest way to deploy it is on Vercel and you can do that by clicking on this button:
+You can preview the production build with `npm run preview`.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdoceazedo%2Fdiscord-invite)
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
